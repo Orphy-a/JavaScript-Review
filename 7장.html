@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="7장.css" />
+    <title>jQuery 모달 팝업</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <!-- 모달 창 구현 -->
+    <button class="login-btn">로그인</button>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <button class="btn btn-danger" id="close">닫기</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    // 로그인 버튼 클릭 시 모달 표시
+    $(".login-btn").click(function () {
+      $(".black-bg").fadeIn();
+    });
+
+    // 닫기 버튼 클릭 시 모달 숨김
+    $("#close").click(function () {
+      $(".black-bg").fadeOut();
+    });
+  </script>
+</html>
