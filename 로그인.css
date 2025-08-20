@@ -16,6 +16,7 @@
   left: 0;
   top: 0;
   background: rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
 .white-bg {
@@ -28,4 +29,9 @@
   transform: translate(-50%, -50%);
   text-align: center;
   padding: 30px;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 5px;
 }

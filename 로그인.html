@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="로그인.css" />
+    <title>jQuery 모달 팝업</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <!-- 모달 창 구현 -->
+    <button class="login-btn">로그인</button>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form action="success.html">
+          <div class="my-3">
+            <input type="text" class="form-control" id="email" />
+          </div>
+          <div class="my-3">
+            <input type="password" class="form-control" id="password" />
+          </div>
+          <button type="submit" class="btn btn-primary">전송</button>
+          <button type="button" class="btn btn-danger" id="close">닫기</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    // 로그인 버튼 클릭 시 모달 표시
+    $(".login-btn").click(function () {
+      $(".black-bg").fadeIn();
+    });
+
+    // 닫기 버튼 클릭 시 모달 숨김
+    $("#close").click(function () {
+      $(".black-bg").fadeOut();
+    });
+
+    // 전송버튼 누르고 input 값이 공백이면 알림 띄우기
+    
+    $('form').on('submit', function(e){
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+
+      if(email.value.trim() === ""){
+        alert("아이디를 입력해주세요.");
+        e.preventDefault(); // action으로 이동 x
+        return; // 밑에 함수 실행 x
+      }
+      if(password.value.trim() === ""){
+        alert("비밀번호를 입력해주세요.")
+        e.preventDefault();
+        return;
+      }
+
+      if(password.value.length < 6){
+        alert("비밀번호 6자리이상 입력해주세요.");
+        e.preventDefault();
+        return;
+      }
+
+
+    });
+    document.getElementById('email').addEventListener('input', function(){
+      console.log('입력테스트');
+    });
+    
+    document.getElementById('email').addEventListener('change', function(){
+      console.log('안녕')
+    });
+    </script>
+</html>
