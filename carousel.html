@@ -4,17 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/test.css" />
+    <link rel="stylesheet" href="/carousel.css" />
   </head>
   <body>
     <div class="slide-wrapper">
       <div class="slide-container">
-        <div class="slide-box"><img src="/img/car1-1.png" /></div>
-        <div class="slide-box"><img src="/img/car2-1.png" /></div>
-        <div class="slide-box"><img src="/img/car3-1.png" /></div>
+        <div class="slide-box"><img src="/img/car1-1.png" alt="" /></div>
+        <div class="slide-box"><img src="/img/car2-1.png" alt="" /></div>
+        <div class="slide-box"><img src="/img/car3-1.png" alt="" /></div>
       </div>
     </div>
-
     <div class="btns">
       <button class="slide-1">1</button>
       <button class="slide-2">2</button>
@@ -23,11 +22,11 @@
 
     <script>
       const slideContainer = document.querySelector(".slide-container");
-      const slides = document.querySelectorAll(".slide-container > *"); // 모든 슬라이드
-      const buttons = document.querySelectorAll('button[class^="slide-"]'); // 모든 버튼
+      const slides = document.querySelectorAll(".slide-container > *"); //슬라이드 아이템 전체
+
+      const buttons = document.querySelectorAll('button[class^="slide-"]');
       const totalSlides = slides.length;
 
-      // 각 버튼에 이벤트 등록
       buttons.forEach((btn, index) => {
         btn.addEventListener("click", () => {
           const movePercent = -(100 / totalSlides) * index;

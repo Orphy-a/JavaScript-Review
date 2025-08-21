@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>답은 1335</p>
+    <input type="text" id="answer" />
+    <button id="send-answer">제출</button>
+    <span id="count-view">0</span>
+
+    <script>
+      // 변수에 예금액을 넣으면
+      // 2년 후의 총 예금액을 자동으로 콘솔창에 출력해주는 기능을 자바스크립트로 만들려고하는데
+      // 어떻게 코드를 짜면 될까요?
+      var 예금액 = 40000;
+      var 미래예금액 = 0;
+
+      function 계산(예금액) {
+        if (예금액 < 50000) {
+          미래예금액 += 예금액 * 1.15 * 1.15;
+        } else {
+          미래예금액 += 예금액 * 1.2 * 1.2;
+        }
+      }
+
+      계산(예금액);
+
+      console.log(미래예금액);
+
+      // 방금 마신 커피의 3분의 2만큼 총 2번 리필해주는 카페가 있습니다.
+      // 예를 들면 처음 커피를 90ml 주문하면 첫 리필은 60ml를 해주며, 그 다음 리필은 40ml를 해주는 카페입니다.
+      // 그럼 처음 주문한 커피 양에 따라서 최대한 마실 수 있는 커피를 콘솔창에 계산해주는 코드를 작성해봅시다.
+      var first = 360;
+      var second = (first * 2) / 3;
+      var third = (second * 2) / 3;
+
+      var total = 0;
+
+      function refill(first) {
+        total += first + second + third;
+      }
+
+      refill(first);
+
+      console.log(total);
+
+      // 유저가 <input>에 답을 적고 제출버튼을 누를 수 있는 퀴즈 UI 입니다.
+      // 1. 유저가 답을 맞추면 alert('성공');
+      // 2. 유저가 답을 3번 찍어서 못맞추면 alert('틀림') 를 띄워봅시다.
+      // 하단에 자바스크립트 작성하면 됩니다.
+
+      const answer = document.getElementById("answer");
+      const send_answer = document.getElementById("send-answer");
+      const countView = document.getElementById("count-view");
+      let count = 0;
+
+      send_answer.addEventListener("click", function () {
+        if (Number(answer.value.trim()) === 1335) {
+          alert("정답");
+          countView.textContent = 0;
+        } else {
+          alert("틀림");
+          count++;
+          countView.textContent = count;
+        }
+      });
+
+      // 위에서 1.2를 여러번 곱했는데 1.2를 10번 곱하려면 코드를 어떻게 짜야될까요?
+      // 1.2 * 1.2 * 1.2 ... 계속 하면 되긴 하는데
+      // 자바스크립트엔 ** 이런 거듭제곱 연산자 기능도 있습니다.
+      let num = 1.2;
+      let result = 0;
+
+      function 거듭제곱(num) {
+        result = Math.pow(num, 10);
+      }
+      거듭제곱(num);
+      console.log(result);
+
+      // 커피리필을 무한으로 해준다면 처음 담아주는 커피가 360ml일 때 총 몇 ml의 커피를 마실 수 있을까요?
+      const 처음 = 360;
+      const 리필비율 = 2 / 3;
+
+      function 리필(처음) {
+        return 처음 / (1 - 리필비율);
+      }
+
+      const 총합계 = 리필(처음);
+      console.log(총합계); // 1080 출력
+    </script>
+  </body>
+</html>

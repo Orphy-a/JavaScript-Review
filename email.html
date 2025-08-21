@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <form action="#">
+      <input id="email" />
+      <input id="password" />
+      <button type="submit">전송</button>
+    </form>
+    <script>
+      function email_check(email) {
+        var reg =
+          /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        return reg.test(email);
+      }
+
+      function password_check(password) {
+        var reg = /^[A-Z]+$/;
+        return reg.test(password);
+      }
+
+      $("form").on("submit", function (e) {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        if (!email) {
+          alert("이메일을 입력해주세요.");
+          e.preventDefault();
+        } else {
+          if (!email_check(email)) {
+            alert("이메일 형식이 아닙니다.");
+            e.preventDefault();
+          }
+        }
+
+        console.log(password_check(password));
+
+        if (!password) {
+          alert("비밀번호를 입력해주세요.");
+          e.preventDefault();
+        } else {
+          if (password_check(password)) {
+            alert("비밀번호에 대문자가 들어가있습니다.");
+            e.preventDefault();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
