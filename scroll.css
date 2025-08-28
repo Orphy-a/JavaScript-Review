@@ -10,7 +10,6 @@
 }
 
 .content {
-  height: 200vw;
   padding-top: 80px; /* 네비게이션 높이만큼 상단 여백 추가 */
 }
 
@@ -21,6 +20,7 @@
   background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .terms-container h2 {
@@ -84,4 +84,26 @@
 
 .checkbox-label:hover {
   color: #007bff;
+}
+
+.terms-wrapper {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.next {
+  width: 70px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  float: right;
+  cursor: not-allowed;
+}
+
+button.next:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+  opacity: 0.6;
+  border: 1px solid #888;
 }
