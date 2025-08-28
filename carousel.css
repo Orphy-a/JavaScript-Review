@@ -7,13 +7,13 @@
 
 .slide-container {
   display: flex;
-  width: 300%;
   transition: transform 0.5s ease;
 }
+
 .slide-box {
-  width: 33.3333%;
   flex-shrink: 0;
 }
+
 .slide-box img {
   width: 100%;
   display: block;

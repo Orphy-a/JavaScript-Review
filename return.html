@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function 함수(min, second) {
+        return (min * 60 + second) * 1000;
+      }
+
+      console.log(함수(1, 30));
+
+      function 할인(price, discount) {
+        if (discount == true) {
+          return price * 0.9 - 1.5;
+        }
+        return price * 0.9;
+      }
+
+      console.log(할인(10, true));
+    </script>
+  </body>
+</html>

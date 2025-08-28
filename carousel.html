@@ -15,23 +15,108 @@
       </div>
     </div>
     <div class="btns">
+      <button class="before"><</button>
       <button class="slide-1">1</button>
       <button class="slide-2">2</button>
       <button class="slide-3">3</button>
+      <button class="next">></button>
     </div>
 
     <script>
       const slideContainer = document.querySelector(".slide-container");
       const slides = document.querySelectorAll(".slide-container > *"); //슬라이드 아이템 전체
+      const next = document.querySelector(".next");
+      const before = document.querySelector(".before");
 
       const buttons = document.querySelectorAll('button[class^="slide-"]');
       const totalSlides = slides.length;
 
-      buttons.forEach((btn, index) => {
-        btn.addEventListener("click", () => {
+      // CSS 동적 설정 함수
+      const initializeSlideStyles = () => {
+        // 슬라이드 컨테이너 너비 설정 (슬라이드 개수 * 100%)
+        slideContainer.style.width = `${totalSlides * 100}%`;
+
+        // 각 슬라이드 박스 너비 설정 (100% / 슬라이드 개수)
+        slides.forEach((slide) => {
+          slide.style.width = `${100 / totalSlides}%`;
+        });
+      };
+
+      // 슬라이드 이동을 위한 유틸리티 함수들
+      const slideUtils = {
+        // 현재 슬라이드 인덱스 가져오기
+        getCurrentSlideIndex: () => {
+          // getComputedStyle을 사용하여 더 정확한 transform 값 가져오기
+          const computedStyle = window.getComputedStyle(slideContainer);
+          const currentTransform = computedStyle.transform;
+
+          // transform이 matrix 형태로 반환되므로 translateX 값 추출
+          if (currentTransform === "none") {
+            return 0;
+          }
+
+          // matrix(1, 0, 0, 1, x, y) 형태에서 x 값 추출
+          const matrix = currentTransform.match(/matrix\([^)]+\)/);
+          if (matrix) {
+            const values = matrix[0].match(/[\d.-]+/g);
+            if (values && values.length >= 5) {
+              const translateX = parseFloat(values[4]); // x 값
+              const slideWidth = slideContainer.offsetWidth / totalSlides;
+              return Math.round(Math.abs(translateX) / slideWidth);
+            }
+          }
+
+          // fallback: style.transform 사용
+          const styleTransform = slideContainer.style.transform;
+          if (styleTransform && styleTransform !== "translateX(0%)") {
+            const match = styleTransform.match(/translateX\(([-\d.]+)%\)/);
+            if (match) {
+              const percent = parseFloat(match[1]);
+              const slideWidth = 100 / totalSlides;
+              return Math.round(Math.abs(percent) / slideWidth);
+            }
+          }
+
+          return 0;
+        },
+
+        // 특정 슬라이드로 이동
+        goToSlide: (index) => {
           const movePercent = -(100 / totalSlides) * index;
           slideContainer.style.transform = `translateX(${movePercent}%)`;
+        },
+
+        // 다음 슬라이드로 이동
+        nextSlide: () => {
+          const currentIndex = slideUtils.getCurrentSlideIndex();
+          const nextIndex = (currentIndex + 1) % totalSlides;
+          slideUtils.goToSlide(nextIndex);
+        },
+
+        // 이전 슬라이드로 이동
+        prevSlide: () => {
+          const currentIndex = slideUtils.getCurrentSlideIndex();
+          const prevIndex =
+            currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+          slideUtils.goToSlide(prevIndex);
+        },
+      };
+
+      // 페이지 로드 시 슬라이드 스타일 초기화
+      initializeSlideStyles();
+
+      buttons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          slideUtils.goToSlide(index);
         });
+      });
+
+      before.addEventListener("click", () => {
+        slideUtils.prevSlide();
+      });
+
+      next.addEventListener("click", () => {
+        slideUtils.nextSlide();
       });
     </script>
   </body>
